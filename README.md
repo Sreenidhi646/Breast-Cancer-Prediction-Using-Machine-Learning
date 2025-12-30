@@ -78,10 +78,8 @@ Breast-Cancer-Prediction-Using-Machine-Learning/
 ## Installation
 
 ### Step 1: Clone the Repository
+https://github.com/Sreenidhi646/Breast-Cancer-Prediction-Using-Machine-Learning.git 
 
-
-git clone https://github.com/Sreenidhi646/Breast-Cancer-Prediction-Using-Machine-Learning.git
-cd Breast-Cancer-Prediction-Using-Machine-Learning
 Step 2: Create Virtual Environment (Optional)
 
 python -m venv venv
