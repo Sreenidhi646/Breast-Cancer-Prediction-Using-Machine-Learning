@@ -10,7 +10,55 @@
         <form method="POST">
             {% for feature in feature_names %}
                 <label>{{ feature }}</label>
-                <input type="number" step="any" name="{{ feature }}" required>
+
+                {% if feature == 'Menopause' %}
+                    <select name="{{ feature }}" required title="0 = Not menopausal, 1 = Menopausal">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                    <small class="help">0 = Not menopausal, 1 = Menopausal</small>
+
+                {% elif feature == 'Inv-Nodes' %}
+                    <select name="{{ feature }}" required title="0 = No invaded nodes, 1 = Invaded nodes">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                    <small class="help">0 = No invaded nodes, 1 = Invaded nodes</small>
+
+                {% elif feature == 'Metastasis' %}
+                    <select name="{{ feature }}" required title="0 = No metastasis, 1 = Metastasis present">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                    <small class="help">0 = No metastasis, 1 = Metastasis present</small>
+
+                {% elif feature == 'History' %}
+                    <select name="{{ feature }}" required title="0 = No prior history, 1 = Prior history">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                    <small class="help">0 = No prior history, 1 = Prior history</small>
+
+                {% elif feature == 'Breast' %}
+                    <select name="{{ feature }}" required title="Select which breast: Right or Left">
+                        <option value="Right">Right</option>
+                        <option value="Left">Left</option>
+                    </select>
+                    <small class="help">Choose side of the breast (Right / Left).</small>
+
+                {% elif feature == 'Breast Quadrant' %}
+                    <select name="{{ feature }}" required title="Select the breast quadrant">
+                        <option value="Upper inner">Upper inner</option>
+                        <option value="Upper outer">Upper outer</option>
+                        <option value="Lower inner">Lower inner</option>
+                        <option value="Lower outer">Lower outer</option>
+                    </select>
+                    <small class="help">Choose quadrant: Upper inner / Upper outer / Lower inner / Lower outer.</small>
+
+                {% else %}
+                    <input type="number" step="any" name="{{ feature }}" required>
+                {% endif %}
+
             {% endfor %}
             <button type="submit">Predict</button>
         </form>

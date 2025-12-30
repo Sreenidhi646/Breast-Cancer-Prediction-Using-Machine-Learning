@@ -28,6 +28,14 @@ input {
     margin-top: 5px;
 }
 
+/* helper text under selects */
+small.help {
+    display: block;
+    margin-top: 4px;
+    color: #555;
+    font-size: 0.9em;
+}
+
 button {
     margin-top: 20px;
     width: 100%;

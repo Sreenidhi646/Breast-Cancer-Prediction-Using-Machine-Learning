@@ -66,13 +66,33 @@ if 'S/N' in df.columns:
 # Assume last column is target
 feature_names = df.columns[:-1]
 
+# Create LabelEncoders for categorical columns that were encoded during training
+from sklearn.preprocessing import LabelEncoder
+encoders = {}
+for col in ['Inv-Nodes', 'Breast', 'Metastasis', 'Breast Quadrant', 'History']:
+    if col in df.columns:
+        le = LabelEncoder()
+        df[col] = df[col].astype(str)
+        le.fit(df[col])
+        encoders[col] = le
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         input_features = []
 
         for feature in feature_names:
-            value = float(request.form[feature])
+            raw = request.form[feature]
+            # If we have an encoder for this feature, use it to convert to the numeric code
+            if feature in encoders:
+                try:
+                    value = float(encoders[feature].transform([raw])[0])
+                except Exception:
+                    # Fallback: try numeric conversion if encoder fails
+                    value = float(raw)
+            else:
+                value = float(raw)
+
             input_features.append(value)
 
         final_features = np.array([input_features])
